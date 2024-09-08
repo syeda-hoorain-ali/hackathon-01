@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Build Your Own Resume</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <main class="resume-section">
+        <h1 class="section-title">Resume Builder</h1>
+        <p class="section-description">Create your own resume with Resume Builder</p>
+        <form class="resume-form" id="resumeForm" method="post">
+            <div class="form">
+                <div>
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input id="username" name="username" type="text" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input id="email" name="email" type="text" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="name" class="form-label">Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-font"></i>
+                        <input id="name" name="name" type="text" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="phone" class="form-label">Phone</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-phone"></i>
+                        <input id="phone" name="phone" type="number" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="profilePic" class="form-label">Profile Picture URL</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-link"></i>
+                        <input id="profilePic" name="profilePic" type="url" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="about" class="form-label">About</label>
+                    <div class="input-wrapper">
+                        <textarea name="about" id="about" rows="4" class="form-textarea"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label for="city" class="form-label">City</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-map-pin"></i>
+                        <input id="city" name="city" type="text" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="profession" class="form-label">Profession</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-code"></i>
+                        <input id="profession" name="profession" type="text" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="githubUrl" class="form-label">Github URL</label>
+                    <div class="input-wrapper">
+                        <i class="fa-brands fa-github"></i>
+                        <input id="githubUrl" name="githubUrl" type="url" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="linkedinUrl" class="form-label">LinkedIn URL</label>
+                    <div class="input-wrapper">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <input id="linkedinUrl" name="linkedinUrl" type="url" class="form-input" />
+                    </div>
+                </div>
+                <div>
+                    <label for="websiteUrl" class="form-label">Website URL</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-globe"></i>
+                        <input id="websiteUrl" name="websiteUrl" type="url" class="form-input" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-wrapper">
+                <button type="submit" class="button">Create Resume</button>
+            </div>
+        </form>
+    </main>
+
+    <div class="container hidden"></div>
+    <div class="button-container">
+        <button id="download" class="hidden button">Download</button>
+        <!-- <button id="share" class="hidden button">Share</button> -->
+    </div>
+
+    <script type="module" src="dist/resume.js"></script>
+    <script type="module" src="dist/script.js"></script>
+
+</body>
+
+</html>
