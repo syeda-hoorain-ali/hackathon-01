@@ -1,7 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const firebase_js_1 = require("./firebase.js");
 const container = document.querySelector('.container');
 const resumeForm = document.getElementById('resumeForm');
 const resumeSection = document.querySelector('.resume-section');
 const downloadBtn = document.getElementById('download');
+const shareBtn = document.getElementById('share');
 const generateUniqueID = () => {
     return '_' + Math.random().toString(36).substr(2, 9);
 };
@@ -134,6 +138,20 @@ const loadUserData = (uniqueID) => {
     downloadBtn.classList.remove('hidden');
     container.innerHTML = data;
 };
+const getUrl = async () => {
+    try {
+        const uniqueID = await (0, firebase_js_1.storeResume)(container.innerHTML);
+        const shareableUrl = `${window.location.origin}/resume?id=${uniqueID}`;
+        navigator.clipboard.writeText(shareableUrl).then(() => {
+            alert('URL copied to clipboard!');
+        });
+        window.location.href = `/resume?id=${uniqueID}`;
+    }
+    catch (error) {
+        console.error("Error storing user data:", error);
+        alert("Failed to save your resume. Please try again.");
+    }
+};
 resumeForm.addEventListener('submit', onSubmit);
 downloadBtn.addEventListener('click', () => window.print());
-export {};
+shareBtn.addEventListener('click', getUrl);

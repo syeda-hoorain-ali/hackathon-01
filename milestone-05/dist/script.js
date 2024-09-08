@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const h2s = document.querySelectorAll('h2');
 if (h2s) {
     h2s.forEach(h2 => {

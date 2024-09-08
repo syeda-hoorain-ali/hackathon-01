@@ -1,9 +1,11 @@
+import { storeResume } from "./firebase.js";
 import { User } from "./types";
 
 const container = document.querySelector('.container') as HTMLDivElement;
 const resumeForm = document.getElementById('resumeForm') as HTMLFormElement;
 const resumeSection = document.querySelector('.resume-section') as HTMLElement;
-const downloadBtn = document.getElementById('download') as HTMLElement;
+const downloadBtn = document.getElementById('download') as HTMLButtonElement;
+const shareBtn = document.getElementById('share') as HTMLButtonElement;
 
 
 
@@ -152,6 +154,23 @@ const loadUserData = (uniqueID: string) => {
     container.innerHTML = data;
 }
 
+const getUrl = async () => {
+    try {
+        const uniqueID = await storeResume(container.innerHTML);
+        const shareableUrl = `${window.location.origin}/resume?id=${uniqueID}`;
+
+        navigator.clipboard.writeText(shareableUrl).then(() => {
+            alert('URL copied to clipboard!');
+        });
+
+        window.location.href = `/resume?id=${uniqueID}`;
+    } catch (error) {
+        console.error("Error storing user data:", error);
+        alert("Failed to save your resume. Please try again.");
+    }
+}
+
 
 resumeForm.addEventListener('submit', onSubmit);
 downloadBtn.addEventListener('click', () => window.print());
+shareBtn.addEventListener('click', getUrl)
