@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.header .subtitle {
+    margin: 5px 0 0;
+    font-size: 18px;
+    color: #333333;
+}
+
+.content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.left-column {
+    width: 30%;
+    padding-right: 20px;
+    background-color: #DEE4EB;
+    padding: 100px 20px 100px 50px;
+}
+
+.right-column {
+    width: 70%;
+    padding-left: 20px;
+}
+
+.logo {
+    border: 1px solid #A3B2C4;
+    padding: 5px;
+}
+
+section>div {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #A3B2C4;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+}
+
+p, ul {
+    margin: 10px 0;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    display: flex;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.logo img {
+    width: 200px;
+}
+
+.job h3 {
+    margin: 10px 0 0 0;
+    font-size: 18px;
+    color: #333333;
+}
+
+.job p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666666;
+}
+
+
+button {
+    display: block;
+    padding: 5px 20px;
+    margin: 40px auto;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.hidden {
+    display: none;
+}
