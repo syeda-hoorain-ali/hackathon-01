@@ -21,82 +21,230 @@
         <p class="section-description">Create your own resume with Resume Builder</p>
         <form class="resume-form" id="resumeForm" method="post">
             <div class="form">
-                <div>
-                    <label for="username" class="form-label">Username</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user"></i>
-                        <input id="username" name="username" type="text" class="form-input" />
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Personal Information</legend>
+
+                    <div class="profilePic">
+                        <label for="profilePic" class="upload">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            Click to upload <br /> Profile picture
+                            <input id="profilePic" name="profilePic" type="file" accept="image/*" required />
+                        </label>
+
+                        <img class="picture hidden" src="" alt="" />
                     </div>
-                </div>
-                <div>
-                    <label for="email" class="form-label">Email</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input id="email" name="email" type="text" class="form-input" />
+
+
+                    <div>
+                        <label for="name" class="form-label">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input id="name" name="name" type="text" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="name" class="form-label">Name</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-font"></i>
-                        <input id="name" name="name" type="text" class="form-input" />
+
+                    <div>
+                        <label for="phone" class="form-label">Phone</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input id="phone" name="phone" type="number" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="phone" class="form-label">Phone</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-phone"></i>
-                        <input id="phone" name="phone" type="number" class="form-input" />
+
+                    <div>
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input id="email" name="email" type="text" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="profilePic" class="form-label">Profile Picture URL</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-link"></i>
-                        <input id="profilePic" name="profilePic" type="url" class="form-input" />
+
+                    <div>
+                        <label for="profession" class="form-label">Profession</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-code"></i>
+                            <input id="profession" name="profession" type="text" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="about" class="form-label">About</label>
-                    <div class="input-wrapper">
-                        <textarea name="about" id="about" rows="4" class="form-textarea"></textarea>
+
+                    <div class="double-input">
+                        <div>
+                            <label for="city" class="form-label">City</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <input id="city" name="city" type="text" class="form-input" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="country" class="form-label">Country</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <input id="country" name="country" type="text" class="form-input" required />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="city" class="form-label">City</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-map-pin"></i>
-                        <input id="city" name="city" type="text" class="form-input" />
+
+                    <div>
+                        <label for="about" class="form-label">About Yourself</label>
+                        <div class="input-wrapper">
+                            <textarea name="about" id="about" rows="4" class="form-textarea" required></textarea>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="profession" class="form-label">Profession</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-code"></i>
-                        <input id="profession" name="profession" type="text" class="form-input" />
+
+                    <div>
+                        <label for="education" class="form-label">Education</label>
+                        <div class="input-wrapper">
+                            <textarea name="education" id="education" rows="5" class="form-textarea"
+                                required></textarea>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="githubUrl" class="form-label">Github URL</label>
-                    <div class="input-wrapper">
-                        <i class="fa-brands fa-github"></i>
-                        <input id="githubUrl" name="githubUrl" type="url" class="form-input" />
+
+                    <div>
+                        <label for="skills" class="form-label">Skills (comma seprated)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-web-awesome"></i>
+                            <input id="skills" name="skills" type="text" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="linkedinUrl" class="form-label">LinkedIn URL</label>
-                    <div class="input-wrapper">
-                        <i class="fa-brands fa-linkedin"></i>
-                        <input id="linkedinUrl" name="linkedinUrl" type="url" class="form-input" />
+
+                    <div>
+                        <label for="githubUrl" class="form-label">Github URL</label>
+                        <div class="input-wrapper">
+                            <i class="fa-brands fa-github"></i>
+                            <input id="githubUrl" name="githubUrl" type="url" class="form-input" required />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="websiteUrl" class="form-label">Website URL</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-globe"></i>
-                        <input id="websiteUrl" name="websiteUrl" type="url" class="form-input" />
+
+                    <div>
+                        <label for="linkedinUrl" class="form-label">LinkedIn URL</label>
+                        <div class="input-wrapper">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <input id="linkedinUrl" name="linkedinUrl" type="url" class="form-input" required />
+                        </div>
                     </div>
-                </div>
+
+                    <div>
+                        <label for="websiteUrl" class="form-label">Website URL</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-globe"></i>
+                            <input id="websiteUrl" name="websiteUrl" type="url" class="form-input" required />
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Most Recent Job</legend>
+
+                    <div>
+                        <label for="job1-title" class="form-label">Title</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <input id="job1-title" name="job1-title" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="job1-company" class="form-label">Company</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-building"></i>
+                            <input id="job1-company" name="job1-company" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="job1-location" class="form-label">Location</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input id="job1-location" name="job1-location" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div class="double-input">
+                        <div>
+                            <label for="job1-start" class="form-label">Start Date</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <input id="job1-start" name="job1-start" type="date" class="form-input" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="job1-end" class="form-label">End Date</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <input id="job1-end" name="job1-end" type="date" class="form-input" required />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="job1-details" class="form-label">Position Details</label>
+                        <div class="input-wrapper">
+                            <textarea name="job1-details" id="job1-details" rows="3" class="form-textarea"
+                                required></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Past Job</legend>
+
+                    <div>
+                        <label for="job2-title" class="form-label">Title</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <input id="job2-title" name="job2-title" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="job2-company" class="form-label">Company</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-building"></i>
+                            <input id="job2-company" name="job2-company" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="job2-location" class="form-label">Location</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input id="job2-location" name="job2-location" type="text" class="form-input" required />
+                        </div>
+                    </div>
+
+                    <div class="double-input">
+                        <div>
+                            <label for="job2-start" class="form-label">Start Date</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <input id="job2-start" name="job2-start" type="date" class="form-input" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="job2-end" class="form-label">End Date</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <input id="job2-end" name="job2-end" type="date" class="form-input" required />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="job2-details" class="form-label">Position Details</label>
+                        <div class="input-wrapper">
+                            <textarea name="job2-details" id="job2-details" rows="3" class="form-textarea"
+                                required></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
             </div>
 
             <div class="submit-button-wrapper">

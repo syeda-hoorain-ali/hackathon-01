@@ -1,14 +1,26 @@
 export interface User {
-    username: string;
-    email: string;
+    profilePic: File | undefined;
     name: string;
-    profilePic: string;
-    about: string;
     phone: string;
+    email: string;
     city: string;
+    country: string;
     profession: string;
+    about: string;
+    education: string;
+    skills: string[];
     githubUrl: string;
     linkedinUrl: string;
     websiteUrl: string;
+    job1: Experience;
+    job2: Experience;
 }
 
+interface Experience {
+    title: string;
+    company: string;
+    city: string;
+    start: string;
+    end: string;
+    details: string;
+}
