@@ -111,3 +111,34 @@ button {
 .hidden {
     display: none;
 }
+
+
+
+@media screen and (max-width: 786px) {
+    html {
+        font-size: 95%;
+    }
+    
+    .left-column {
+        padding: 50px 10px 100px 10px;
+    }
+    .right-column {
+        padding-left: 20px;
+    }
+    .logo img {
+        width: 100%;
+    }
+    .header h1 {
+        font-size: 28px;
+    }
+    .header .subtitle {
+        font-size: 16px;
+    }
+    .job h3 {
+        font-size: 16px;
+    }
+    .contact p {
+        overflow-wrap: break-word;
+        font-size: 14px;
+    }
+}
