@@ -16,17 +16,19 @@ const startAnimation = () => {
 const cuteCursor = (e: MouseEvent) => {
   cursor.style.top = e.clientY + 'px'
   cursor.style.left = (e.clientX - 2) + 'px'
+  cursor.hidden = false
 
   buttons.forEach(button => {
     const crs = cursor.getBoundingClientRect()
     const btn = button.getBoundingClientRect()
 
-    cursor.hidden = (crs.top <= btn.bottom) &&
-    (crs.bottom >= btn.top) &&
-    (crs.left <= btn.right) &&
-    (crs.right >= btn.left)
-
-  })
+    if (
+      (crs.top <= btn.bottom) &&
+      (crs.bottom >= btn.top) &&
+      (crs.left <= btn.right) &&
+      (crs.right >= btn.left)
+    ) { cursor.hidden = true }
+  })  
 }
 
 const animatedClick = (e: MouseEvent) => {
