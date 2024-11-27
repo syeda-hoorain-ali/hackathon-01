@@ -203,8 +203,23 @@ body {
     box-shadow: 0 0 4px aqua;
 }
 
+.range-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .form-input[type="date"] {
     height: 42.38px;
+}
+
+.form-input[type="range"] {
+    padding: 0;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+
+    &:focus {
+        filter: drop-shadow(0 0 4px aqua);
+    }
 }
 
 .form-textarea {
@@ -278,6 +293,38 @@ body {
     background-color: rgb(38, 202, 202);
     outline: none;
     box-shadow: 0 0 4px aquamarine;
+}
+
+#skillsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rating-wrapper {
+    width: 120%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.range-wrapper>div {
+    width: 100%;
+}
+
+.trash {
+    height: 2rem;
+    width: 2rem;
+    display: block;
+    font-size: 12em;
+    color: #ffffff;
+    background-color: red;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateX(50%);
 }
 
 .hidden {

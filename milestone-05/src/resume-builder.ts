@@ -1,4 +1,4 @@
-import { User } from "./types.js";
+import { ISkills, IUser } from "./types.js";
 
 const animationSection = document.querySelector('.background-animation') as HTMLDivElement;
 const container = document.querySelector('.container') as HTMLDivElement;
@@ -6,23 +6,28 @@ const resumeForm = document.getElementById('resumeForm') as HTMLFormElement;
 const resumeSection = document.querySelector('.resume-section') as HTMLElement;
 const downloadBtn = document.getElementById('download') as HTMLButtonElement;
 const profilePic = document.getElementById('profilePic') as HTMLInputElement;
+const skillsContainer = document.getElementById('skillsContainer') as HTMLDivElement;
+const skillsButton = document.getElementById('skillsButton') as HTMLButtonElement;
+const ratings = document.getElementsByClassName('rating') as HTMLCollectionOf<HTMLInputElement>;
+
+const skills: ISkills[] = [{ name: '', rating: 0 }]
 
 const backgroundAnimation = () => {
     for (let i = 0; i <= 2500; i++) {
         const box = document.createElement('div');
         box.classList.add('box')
-        animationSection.appendChild(box)        
+        animationSection.appendChild(box)
     }
 }
 
 
-const getUserData = (): User => {
+const getUserData = (): IUser => {
     // Helper function to get the value of an input field and trim it
     const $ = (id: string): string =>
         (document.getElementById(id) as HTMLInputElement)?.value.trim() ?? '';
 
 
-    const user: User = {
+    const user: IUser = {
         profilePic: profilePic.files?.[0] || undefined,
         name: $('name'),
         phone: $('phone'),
@@ -32,7 +37,7 @@ const getUserData = (): User => {
         profession: $('profession'),
         about: $('about'),
         education: $('education'),
-        skills: $('skills').split(','),
+        skills: skills,
         githubUrl: $('githubUrl'),
         linkedinUrl: $('linkedinUrl'),
         websiteUrl: $('websiteUrl'),
@@ -57,15 +62,17 @@ const getUserData = (): User => {
     return user
 }
 
-const loadUserData = (user: User) => {
+const loadUserData = (user: IUser) => {
     const image = URL.createObjectURL(user.profilePic!)
 
     const skills = user.skills.map(skill => {
-        skill = skill.trim()
-        console.log(skill);
-        return `<li contenteditable="true">${skill}</li>`
+        const name = skill.name.trim()
+        return `<li contenteditable="true">
+            <span class="text">${name}</span>
+            <span class="percent"><div style="width:${skill.rating}%"></div></span>
+        </li>`
     }).join('')
-    
+
 
     const data = `
     <div class="content">
@@ -149,14 +156,83 @@ const loadUserData = (user: User) => {
     container.innerHTML = data;
 }
 
+const getAbc = (rating: number) => {
+    if (rating === 1) return 'Novice';
+    if (rating === 2) return 'Beginer';
+    if (rating === 3) return 'Intermediate';
+    if (rating === 4) return 'Advanced';
+    if (rating === 5) return 'Professional';
+    return 'None';
+}
+
+const showSkills = () => {
+
+    skillsContainer.innerHTML = '';
+    skills.map((skill, i) => {
+
+        const input = `<div class="double-input">
+            <div>
+              <label for="skills.${i}.name" class="form-label">Name</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-web-awesome"></i>
+                <input id="skills.${i}.name" name="skills.${i}.name" value="${skill.name}" type="text" class="form-input names" autocomplete="none" required />
+              </div>
+            </div>
+
+            <div class="rating-wrapper">
+                <div>
+                    <label for="skills.${i}.rating" class="form-label">Rating</label>
+                    <div class="input-wrapper range-wrapper">
+                        <input id="skills.${i}.rating" name="skills.${i}.rating" value="${skill.rating}" type="range" step="20" data-target="detail-${i}" class="form-input rating" required />
+                        <span id="detail-${i}">${getAbc(skill.rating / 20)}</span>
+                    </div>
+                </div>
+
+                <button class="trash" id="skills.${i}.trash"><i class="fa-regular fa-trash-can"></i></button>
+            </div>
+        </div>`
+
+        skillsContainer.insertAdjacentHTML("beforeend", input)
+
+        const name = document.getElementById(`skills.${i}.name`) as HTMLInputElement;
+        const rating = document.getElementById(`skills.${i}.rating`) as HTMLInputElement;
+        const trash = document.getElementById(`skills.${i}.trash`) as HTMLButtonElement;
+
+        name.addEventListener('change', e => handleName((e.target as HTMLInputElement).value, i))
+        rating.addEventListener('change', e => handleRating(e, i))
+        trash.addEventListener('click', () => handleDelete(i))
+    })
+}
+
 const onPictureUpload = () => {
-    console.log('h');
     const picture = document.querySelector('.picture') as HTMLImageElement
     if (!profilePic.files) return
 
     const userImage = profilePic.files[0]
     picture.src = URL.createObjectURL(userImage)
     picture.classList.remove('hidden')
+}
+
+const handleDelete = (i: number) => {
+    skills.splice(i, 1);
+    showSkills()
+}
+
+const handleName = (value: string, i: number) => skills[i].name = value;
+
+const handleRating = (e: Event, i: number = 0) => {
+    const input = e.target as HTMLInputElement
+    skills[i].rating = input.valueAsNumber;
+
+    const id = input.getAttribute('data-target') as string
+    const span = document.getElementById(id) as HTMLSpanElement;
+    span.innerHTML = getAbc(input.valueAsNumber / 20)
+}
+
+const addSkill = () => {
+    skills.push({ name: '', rating: 0 })
+    showSkills()
+    console.log(skills);
 }
 
 const onSubmit = (e: SubmitEvent) => {
@@ -167,6 +243,12 @@ const onSubmit = (e: SubmitEvent) => {
 
 
 backgroundAnimation()
+showSkills()
 resumeForm.addEventListener('submit', onSubmit);
 downloadBtn.addEventListener('click', () => window.print());
 profilePic.addEventListener('change', onPictureUpload);
+skillsButton.addEventListener('click', addSkill);
+
+for (const input of ratings) {
+    input.addEventListener('change', handleRating)
+}

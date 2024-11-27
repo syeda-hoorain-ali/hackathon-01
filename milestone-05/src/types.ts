@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
     profilePic: File | undefined;
     name: string;
     phone: string;
@@ -8,15 +8,20 @@ export interface User {
     profession: string;
     about: string;
     education: string;
-    skills: string[];
+    skills: ISkills[];
     githubUrl: string;
     linkedinUrl: string;
     websiteUrl: string;
-    job1: Experience;
-    job2: Experience;
+    job1: IExperience;
+    job2: IExperience;
 }
 
-interface Experience {
+export interface ISkills {
+    name: string;
+    rating: number;
+}
+
+export interface IExperience {
     title: string;
     company: string;
     city: string;

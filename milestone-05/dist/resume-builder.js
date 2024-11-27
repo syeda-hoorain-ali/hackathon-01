@@ -4,6 +4,10 @@ const resumeForm = document.getElementById('resumeForm');
 const resumeSection = document.querySelector('.resume-section');
 const downloadBtn = document.getElementById('download');
 const profilePic = document.getElementById('profilePic');
+const skillsContainer = document.getElementById('skillsContainer');
+const skillsButton = document.getElementById('skillsButton');
+const ratings = document.getElementsByClassName('rating');
+const skills = [{ name: '', rating: 0 }];
 const backgroundAnimation = () => {
     for (let i = 0; i <= 2500; i++) {
         const box = document.createElement('div');
@@ -24,7 +28,7 @@ const getUserData = () => {
         profession: $('profession'),
         about: $('about'),
         education: $('education'),
-        skills: $('skills').split(','),
+        skills: skills,
         githubUrl: $('githubUrl'),
         linkedinUrl: $('linkedinUrl'),
         websiteUrl: $('websiteUrl'),
@@ -50,9 +54,11 @@ const getUserData = () => {
 const loadUserData = (user) => {
     const image = URL.createObjectURL(user.profilePic);
     const skills = user.skills.map(skill => {
-        skill = skill.trim();
-        console.log(skill);
-        return `<li contenteditable="true">${skill}</li>`;
+        const name = skill.name.trim();
+        return `<li contenteditable="true">
+            <span class="text">${name}</span>
+            <span class="percent"><div style="width:${skill.rating}%"></div></span>
+        </li>`;
     }).join('');
     const data = `
     <div class="content">
@@ -134,8 +140,53 @@ const loadUserData = (user) => {
     downloadBtn.classList.remove('hidden');
     container.innerHTML = data;
 };
+const getAbc = (rating) => {
+    if (rating === 1)
+        return 'Novice';
+    if (rating === 2)
+        return 'Beginer';
+    if (rating === 3)
+        return 'Intermediate';
+    if (rating === 4)
+        return 'Advanced';
+    if (rating === 5)
+        return 'Professional';
+    return 'None';
+};
+const showSkills = () => {
+    skillsContainer.innerHTML = '';
+    skills.map((skill, i) => {
+        const input = `<div class="double-input">
+            <div>
+              <label for="skills.${i}.name" class="form-label">Name</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-web-awesome"></i>
+                <input id="skills.${i}.name" name="skills.${i}.name" value="${skill.name}" type="text" class="form-input names" autocomplete="none" required />
+              </div>
+            </div>
+
+            <div class="rating-wrapper">
+                <div>
+                    <label for="skills.${i}.rating" class="form-label">Rating</label>
+                    <div class="input-wrapper range-wrapper">
+                        <input id="skills.${i}.rating" name="skills.${i}.rating" value="${skill.rating}" type="range" step="20" data-target="detail-${i}" class="form-input rating" required />
+                        <span id="detail-${i}">${getAbc(skill.rating / 20)}</span>
+                    </div>
+                </div>
+
+                <button class="trash" id="skills.${i}.trash"><i class="fa-regular fa-trash-can"></i></button>
+            </div>
+        </div>`;
+        skillsContainer.insertAdjacentHTML("beforeend", input);
+        const name = document.getElementById(`skills.${i}.name`);
+        const rating = document.getElementById(`skills.${i}.rating`);
+        const trash = document.getElementById(`skills.${i}.trash`);
+        name.addEventListener('change', e => handleName(e.target.value, i));
+        rating.addEventListener('change', e => handleRating(e, i));
+        trash.addEventListener('click', () => handleDelete(i));
+    });
+};
 const onPictureUpload = () => {
-    console.log('h');
     const picture = document.querySelector('.picture');
     if (!profilePic.files)
         return;
@@ -143,13 +194,35 @@ const onPictureUpload = () => {
     picture.src = URL.createObjectURL(userImage);
     picture.classList.remove('hidden');
 };
+const handleDelete = (i) => {
+    skills.splice(i, 1);
+    showSkills();
+};
+const handleName = (value, i) => skills[i].name = value;
+const handleRating = (e, i = 0) => {
+    const input = e.target;
+    skills[i].rating = input.valueAsNumber;
+    const id = input.getAttribute('data-target');
+    const span = document.getElementById(id);
+    span.innerHTML = getAbc(input.valueAsNumber / 20);
+};
+const addSkill = () => {
+    skills.push({ name: '', rating: 0 });
+    showSkills();
+    console.log(skills);
+};
 const onSubmit = (e) => {
     e.preventDefault();
     const user = getUserData();
     loadUserData(user);
 };
 backgroundAnimation();
+showSkills();
 resumeForm.addEventListener('submit', onSubmit);
 downloadBtn.addEventListener('click', () => window.print());
 profilePic.addEventListener('change', onPictureUpload);
+skillsButton.addEventListener('click', addSkill);
+for (const input of ratings) {
+    input.addEventListener('change', handleRating);
+}
 export {};
